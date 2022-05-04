@@ -1,5 +1,9 @@
 package com.assg.batch1.repository;
 
-public interface EmployeeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.assg.batch1.entity.Employee;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 }
