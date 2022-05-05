@@ -21,7 +21,7 @@ public class JobController {
 	@Autowired
 	private Job job;
 	
-	@PostMapping("/importCustomers")
+	@PostMapping("/importEmployee")
 	public void importCsvToDB() {
 		JobParameters jobParam = new JobParametersBuilder()
 				.addLong("start at",System.currentTimeMillis()).toJobParameters();

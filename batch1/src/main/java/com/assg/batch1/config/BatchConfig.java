@@ -11,6 +11,7 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -24,10 +25,11 @@ import lombok.AllArgsConstructor;
 @EnableBatchProcessing
 @AllArgsConstructor
 public class BatchConfig {
+	@Autowired
 	private JobBuilderFactory jobBuilderFactory;
-	
+	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
-	
+	@Autowired
 	private EmployeeRepository employeeRepository;
 	
 	@Bean
@@ -68,7 +70,7 @@ public class BatchConfig {
 	
 	@Bean
 	public Step step1() {
-		return stepBuilderFactory.get("csv-step").<Employee,Employee>chunk(10)
+		return stepBuilderFactory.get("csv-step").<Employee,Employee>chunk(50)
 				.reader(reader())
 				.processor(processor())
 				.writer(writer())
@@ -76,7 +78,7 @@ public class BatchConfig {
 	}
 	@Bean
 	public Job runJob() {
-		return jobBuilderFactory.get("importEmployee")
+		return this.jobBuilderFactory.get("importEmployee")
 				.flow(step1()).end().build();
 	}
 	
