@@ -16,6 +16,7 @@ public class XmlReader extends StaxEventItemReader<Person> {
 		Jaxb2Marshaller marshaller=new Jaxb2Marshaller();
 		Map<String,String> map=new HashMap<String,String>();
     	map.put("person","com.assig.XmlToDb.entity.Person");
+    	marshaller.setMappedClass(com.assig.XmlToDb.entity.Person.class);
     	marshaller.setClassesToBeBound(com.assig.XmlToDb.entity.Person.class);
     	this.setUnmarshaller(marshaller);
 	}
