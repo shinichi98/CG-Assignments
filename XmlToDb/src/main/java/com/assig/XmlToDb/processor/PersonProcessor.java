@@ -8,7 +8,8 @@ public class PersonProcessor implements ItemProcessor<Person, Person> {
 
 	@Override
 	public Person process(Person item) throws Exception {
-		return item;
+		if(item.getAge()>30) return item;
+		else return null;
 	}
 	
 }
